@@ -1,5 +1,5 @@
 import { MenuIcon, UserPlusIcon } from '@/assets/icons';
-import { MapImage } from '@/assets/images';
+import { EffileTowerImage, MapImage } from '@/assets/images';
 import {
   Avatar,
   AvatarFallback,
@@ -24,6 +24,7 @@ import { DESTINATION_DETAILS_TABS_ENUM } from '@/constants/destination';
 import { objectValues } from '@/lib/utils';
 import Image from 'next/image';
 import { Overview } from './overview';
+import { GoogleMapWrapper } from '@/components/custom';
 
 const { BOOKINGS, BUDGET, OVERVIEW, PACKING_LIST, THINGS_TO_KNOW } =
   DESTINATION_DETAILS_TABS_ENUM;
@@ -34,8 +35,12 @@ const page = () => {
       <div className="col-span-8 pt-4 pr-8">
         <div className="flex justify-between">
           <div className="flex gap-4">
-            <div className="w-40 h-20 border rounded-lg bg-slate-200">
-              <Image alt="destination-img" src={''} />
+            <div className="w-40 h-20">
+              <Image
+                alt="destination-img"
+                src={EffileTowerImage}
+                style={{ borderRadius: 4 }}
+              />
             </div>
             <div>
               <div>
@@ -116,11 +121,12 @@ const page = () => {
         </div>
       </div>
       <div className="col-span-4">
-        <Image
+        <GoogleMapWrapper />
+        {/* <Image
           alt="map-img"
           src={MapImage}
           style={{ width: '100%', objectFit: 'fill' }}
-        />
+        /> */}
       </div>
     </div>
   );

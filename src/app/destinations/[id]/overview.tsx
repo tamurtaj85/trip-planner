@@ -1,7 +1,26 @@
-import { Button, H6, Paragraph, Separator } from '@/components/ui';
+import {
+  Button,
+  H6,
+  Paragraph,
+  Separator,
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui';
 import { DestinationsData } from '@/db/destinations';
-import { CarTaxiFront, EllipsisVertical } from '@/assets/icons';
+import {
+  CarTaxiFront,
+  EllipsisVertical,
+  MessageCircleQuestion,
+  Star,
+  StarHalf,
+} from '@/assets/icons';
 import React from 'react';
+import Image from 'next/image';
+import { JapanImage } from '@/assets/images';
 
 export const Overview = () => {
   return (
@@ -38,7 +57,7 @@ const PlaceCard: React.FC<IPlaceCard> = ({ index, placeData }) => {
   const { placeName, placeType, placeDetails } = placeData;
 
   return (
-    <div>
+    <Sheet>
       <div className="flex gap-4 mb-2">
         <div className="flex flex-col gap-2 items-center">
           <div className="border border-violet-900 rounded-full size-9 flex flex-shrink-0 justify-center items-center">
@@ -48,12 +67,14 @@ const PlaceCard: React.FC<IPlaceCard> = ({ index, placeData }) => {
         </div>
         <div className="w-full">
           <div className="flex justify-between border border-gray-300 rounded-md p-4">
-            <div className="basis-[95%]">
-              <H6>{placeName}</H6>
-              <Paragraph>{placeDetails}</Paragraph>
-            </div>
+            <SheetTrigger className="text-left w-full">
+              <div className="basis-[95%]">
+                <H6>{placeName}</H6>
+                <Paragraph>{placeDetails}</Paragraph>
+              </div>
+            </SheetTrigger>
             <div>
-              <Button size={'icon'} variant={'ghost'}>
+              <Button size={'icon'} variant={'ghost'} role="menu">
                 <EllipsisVertical className="text-gray-500" />
               </Button>
             </div>
@@ -66,6 +87,74 @@ const PlaceCard: React.FC<IPlaceCard> = ({ index, placeData }) => {
           </div>
         </div>
       </div>
-    </div>
+      <SheetContent className="p-0 min-w-[500px] overflow-y-auto">
+        <div className="w-full min-h-56 h-[35%] bg-slate-500">
+          <Image
+            alt="visiting-place-img"
+            src={JapanImage}
+            style={{ width: '100%', minHeight: '14rem', height: '100%' }}
+          />
+        </div>
+        <div className="p-4">
+          <SheetHeader className="">
+            <SheetTitle>{placeName}</SheetTitle>
+            <div className="flex items-center gap-2 my-2">
+              <div className="flex gap-2 text-yellow-400">
+                <Star fill="gold" size={14} />
+                <Star fill="gold" size={14} />
+                <Star fill="gold" size={14} />
+                <Star fill="gold" size={14} />
+                <StarHalf fill="gold" size={14} />
+              </div>
+              <SheetDescription className="text-sm font-normal text-gray-500">
+                (5000 Reviews on Google)
+              </SheetDescription>
+            </div>
+          </SheetHeader>
+          <div className="text-sm text-gray-500 mb-4">
+            <p className="mb-2">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Similique facilis nam sed veniam non, quisquam, aperiam quibusdam
+              est maxime iusto incidunt soluta repellat quam ipsa porro sit
+              laboriosam dolorum quod.
+            </p>
+            <p className="mb-2">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Similique facilis nam sed veniam non, quisquam, aperiam quibusdam
+              est maxime iusto incidunt soluta repellat quam ipsa porro sit
+              laboriosam dolorum quod.
+            </p>
+            <p className="mb-2">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Similique facilis nam sed veniam non, quisquam, aperiam quibusdam
+              est maxime iusto incidunt soluta repellat quam ipsa porro sit
+              laboriosam dolorum quod.
+            </p>
+          </div>
+          <div className="bg-slate-200 w-full p-2 rounded-md">
+            <H6 className="flex gap-2 mb-2">
+              <span>
+                <MessageCircleQuestion className="text-violet-500" />
+              </span>
+              Why this choice?
+            </H6>
+            <div className="ml-8 ">
+              <Paragraph className="text-sm text-gray-500 mb-2">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Similique facilis nam sed veniam non, quisquam, aperiam
+                quibusdam est maxime iusto incidunt soluta repellat quam ipsa
+                porro sit laboriosam dolorum quod.
+              </Paragraph>
+              <Paragraph className="text-sm text-gray-500 mb-2">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Similique facilis nam sed veniam non, quisquam, aperiam
+                quibusdam est maxime iusto incidunt soluta repellat quam ipsa
+                porro sit laboriosam dolorum quod.
+              </Paragraph>
+            </div>
+          </div>
+        </div>
+      </SheetContent>
+    </Sheet>
   );
 };
