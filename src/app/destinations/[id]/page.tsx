@@ -1,5 +1,6 @@
 import { MenuIcon, UserPlusIcon } from '@/assets/icons';
-import { MapImage } from '@/assets/images';
+import { EffileTowerImage } from '@/assets/images';
+import { GoogleMapWrapper } from '@/components/custom';
 import {
   Avatar,
   AvatarFallback,
@@ -20,7 +21,13 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/components/ui';
+import { DESTINATION_DETAILS_TABS_ENUM } from '@/constants/destination';
+import { objectValues } from '@/lib/utils';
 import Image from 'next/image';
+import { Overview } from './overview';
+
+const { BOOKINGS, BUDGET, OVERVIEW, PACKING_LIST, THINGS_TO_KNOW } =
+  DESTINATION_DETAILS_TABS_ENUM;
 
 const page = () => {
   return (
@@ -28,8 +35,12 @@ const page = () => {
       <div className="col-span-8 pt-4 pr-8">
         <div className="flex justify-between">
           <div className="flex gap-4">
-            <div className="w-40 h-20 border rounded-lg bg-slate-200">
-              <Image alt="destination-img" src={''} />
+            <div className="w-40 h-20">
+              <Image
+                alt="destination-img"
+                src={EffileTowerImage}
+                style={{ borderRadius: 4 }}
+              />
             </div>
             <div>
               <div>
@@ -82,30 +93,35 @@ const page = () => {
           </div>
         </div>
         <div className="mt-8">
-          <Tabs defaultValue="overview">
+          <Tabs defaultValue={OVERVIEW.key}>
             <TabsList className="bg-transparent">
-              <TabsTrigger value="overview">Overview</TabsTrigger>
-              <TabsTrigger value="bookings">Bookings</TabsTrigger>
-              <TabsTrigger value="budget">Budget</TabsTrigger>
-              <TabsTrigger value="packingList">Packing List</TabsTrigger>
-              <TabsTrigger value="thingsToKnow">Things to know</TabsTrigger>
+              {objectValues(DESTINATION_DETAILS_TABS_ENUM).map(
+                ({ key, name }, index) => (
+                  <TabsTrigger
+                    key={index}
+                    value={key}
+                    className="data-[state=active]:text-violet-900 data-[state=active]:border-b-[1px] data-[state=active]:border-b-violet-900"
+                  >
+                    {name}
+                  </TabsTrigger>
+                )
+              )}
             </TabsList>
             <Separator />
-            <TabsContent value="overview">
-              Make changes to your account here.
+            <TabsContent value={OVERVIEW.key}>
+              <Overview />
             </TabsContent>
-            <TabsContent value="bookings">
-              Change your password here.
+            <TabsContent value={BOOKINGS.key}>Bookings.</TabsContent>
+            <TabsContent value={BUDGET.key}>Budget.</TabsContent>
+            <TabsContent value={PACKING_LIST.key}>Packing list.</TabsContent>
+            <TabsContent value={THINGS_TO_KNOW.key}>
+              Things to know.
             </TabsContent>
           </Tabs>
         </div>
       </div>
       <div className="col-span-4">
-        <Image
-          alt="map-img"
-          src={MapImage}
-          style={{ width: '100%', objectFit: 'fill' }}
-        />
+        <GoogleMapWrapper />
       </div>
     </div>
   );
