@@ -1,5 +1,6 @@
 import { MenuIcon, UserPlusIcon } from '@/assets/icons';
-import { EffileTowerImage, MapImage } from '@/assets/images';
+import { EffileTowerImage } from '@/assets/images';
+import { GoogleMapWrapper } from '@/components/custom';
 import {
   Avatar,
   AvatarFallback,
@@ -24,7 +25,6 @@ import { DESTINATION_DETAILS_TABS_ENUM } from '@/constants/destination';
 import { objectValues } from '@/lib/utils';
 import Image from 'next/image';
 import { Overview } from './overview';
-import { GoogleMapWrapper } from '@/components/custom';
 
 const { BOOKINGS, BUDGET, OVERVIEW, PACKING_LIST, THINGS_TO_KNOW } =
   DESTINATION_DETAILS_TABS_ENUM;
@@ -100,7 +100,7 @@ const page = () => {
                   <TabsTrigger
                     key={index}
                     value={key}
-                    className="data-[state=active]:text-violet-900 data-[state=active]:shadow-none data-[state=active]:border-b-[1px] data-[state=active]:border-b-violet-900"
+                    className="data-[state=active]:text-violet-900 data-[state=active]:border-b-[1px] data-[state=active]:border-b-violet-900"
                   >
                     {name}
                   </TabsTrigger>
@@ -122,11 +122,6 @@ const page = () => {
       </div>
       <div className="col-span-4">
         <GoogleMapWrapper />
-        {/* <Image
-          alt="map-img"
-          src={MapImage}
-          style={{ width: '100%', objectFit: 'fill' }}
-        /> */}
       </div>
     </div>
   );

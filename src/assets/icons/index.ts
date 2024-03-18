@@ -7,4 +7,7 @@ export {
   Star,
   StarHalf,
   MessageCircleQuestion,
+  Repeat1,
+  MapPin,
+  Trash2,
 } from 'lucide-react';

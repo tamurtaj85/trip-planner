@@ -1,6 +1,22 @@
 import {
+  CarTaxiFront,
+  EllipsisVertical,
+  MapPin,
+  MessageCircleQuestion,
+  Repeat1,
+  Star,
+  StarHalf,
+  Trash2,
+} from '@/assets/icons';
+import { JapanImage } from '@/assets/images';
+import {
   Button,
   H6,
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarTrigger,
   Paragraph,
   Separator,
   Sheet,
@@ -11,16 +27,8 @@ import {
   SheetTrigger,
 } from '@/components/ui';
 import { DestinationsData } from '@/db/destinations';
-import {
-  CarTaxiFront,
-  EllipsisVertical,
-  MessageCircleQuestion,
-  Star,
-  StarHalf,
-} from '@/assets/icons';
-import React from 'react';
 import Image from 'next/image';
-import { JapanImage } from '@/assets/images';
+import React from 'react';
 
 export const Overview = () => {
   return (
@@ -74,9 +82,33 @@ const PlaceCard: React.FC<IPlaceCard> = ({ index, placeData }) => {
               </div>
             </SheetTrigger>
             <div>
-              <Button size={'icon'} variant={'ghost'} role="menu">
-                <EllipsisVertical className="text-gray-500" />
-              </Button>
+              <Menubar className="border-none">
+                <MenubarMenu>
+                  <MenubarTrigger className="">
+                    <EllipsisVertical className="text-gray-500" />
+                  </MenubarTrigger>
+                  <MenubarContent>
+                    <MenubarItem>
+                      <span className="mr-2">
+                        <Repeat1 size={14} />
+                      </span>
+                      Replace with Guidebot
+                    </MenubarItem>
+                    <MenubarItem>
+                      <span className="mr-2">
+                        <MapPin size={14} />
+                      </span>
+                      Replace manually
+                    </MenubarItem>
+                    <MenubarItem className="text-red-500">
+                      <span className="mr-2">
+                        <Trash2 size={14} />
+                      </span>
+                      Remove place
+                    </MenubarItem>
+                  </MenubarContent>
+                </MenubarMenu>
+              </Menubar>
             </div>
           </div>
           <div className="flex gap-4 items-end mt-2 text-gray-500">
